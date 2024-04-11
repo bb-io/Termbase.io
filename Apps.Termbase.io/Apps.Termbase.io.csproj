@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <Product>Termbase.io</Product>
+        <Description>termbase.io is a fully featured translation solution for enterprises and LSPs, with the focus on leveraging AI and corporate language to produce best quality and human verified results.</Description>
+        <Version>1.0.0</Version>
+        <PackageId>Apps.Termbase.io</PackageId>
+        <AssemblyName>Apps.Termbase.io</AssemblyName>
+        <RootNamespace>Apps.Termbase.io</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.6.0" />
+      <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.25" />
+    </ItemGroup>
+
+</Project>
