@@ -49,10 +49,10 @@ public class TermImportActions(InvocationContext invocationContext, IFileManagem
     }
     
     [Action("Export term import", Description = "Download tbx from term import")]
-    public async Task<FileReference> ExportTermImportAsTbx([ActionParameter] GetTermImportRequest request,
-        [ActionParameter, Display("Format"), StaticDataSource(typeof(ExportFormatStaticDataSourceHandler))] string? format)
+    public async Task<FileReference> ExportTermImportAsTbx([ActionParameter] GetTermImportRequest request, 
+        [ActionParameter] ExportFileRequest exportFileRequest)
     {
-        format ??= "tbx";
+        var format = exportFileRequest.Format ?? "tbx";
         var termImportService = new TermImportService();
 
         var monitoredTermImport = await termImportService.GetTermImport(Creds, request.TermImportUuid);
@@ -62,13 +62,18 @@ public class TermImportActions(InvocationContext invocationContext, IFileManagem
         
         if(format == "tbx")
         {
-            var glossaryExporter = new GlossaryExporter(stream);
+            var glossaryExporter = new GlossaryExporter(stream)
+            {
+                SkipEmptyTerms = exportFileRequest.SkipEmptyTerms ?? true
+            };
+            
             var glossary = glossaryExporter.ExportGlossary();
             stream = glossary.ConvertToTbx();
         }
         
-        string contentType = "application/octet-stream";
-        return await fileManagementClient.UploadAsync(stream, contentType, $"{monitoredTermImport.Name}.tbx");
+        string fileName = $"{monitoredTermImport.Name}.{format}";
+        string contentType = MimeTypes.GetMimeType(fileName);
+        return await fileManagementClient.UploadAsync(stream, contentType, fileName);
     }
 
     #endregion

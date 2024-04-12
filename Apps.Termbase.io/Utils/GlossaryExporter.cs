@@ -10,6 +10,7 @@ public class GlossaryExporter
     public GlossaryExporter(Stream inputFileStream)
     {
         this.tbxDocument = XDocument.Load(inputFileStream);
+        SkipEmptyTerms = true;
     }
 
     public bool SkipEmptyTerms { get; set; }
