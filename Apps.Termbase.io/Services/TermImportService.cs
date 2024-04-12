@@ -1,5 +1,4 @@
-﻿using System.Net;
-using Apps.Termbase.io.Api;
+﻿using Apps.Termbase.io.Api;
 using Apps.Termbase.io.Constants;
 using Apps.Termbase.io.Models.Dto;
 using Apps.Termbase.io.Models.Request;
@@ -66,30 +65,19 @@ public class TermImportService
 
     public async Task<Stream> ExportTermImportAsTbx(
         string termbaseUuid,
+        string format,
         IEnumerable<AuthenticationCredentialsProvider> creds)
     {
-        var client = new RestClient(Urls.Api);
-        var request = new RestRequest(ApiEndpoints.Termbases + "/" + termbaseUuid + "/export_to_tbx");
-
-        var authHeader = creds.First(x => x.KeyName == CredsNames.ApiKey);
-        request.AddHeader(authHeader.KeyName, authHeader.Value);
-
-        try
+        var request = new TermbaseRequest(new TermbaseRequestParameters
         {
-            var response = await client.ExecuteAsync(request);
-            if (response.StatusCode != HttpStatusCode.OK)
-            {
-                throw new Exception($"Failed to export term import as TBX: {response.ErrorMessage}; Status code: {response.StatusCode}");
-            }
+            Url = Urls.Api + ApiEndpoints.Termbases + $"/{termbaseUuid}/export_to_{format}",
+            Method = Method.Get
+        }, creds).AddHeader("Accept", "application/ld+json");
+        
+        var response = await Client.ExecuteWithHandling(request);
+        var memoryStream = new MemoryStream(response.RawBytes!);
+        memoryStream.Seek(0, SeekOrigin.Begin);
 
-            var memoryStream = new MemoryStream(response.RawBytes!);
-            memoryStream.Seek(0, SeekOrigin.Begin);
-
-            return memoryStream;
-        }
-        catch (Exception ex)
-        {
-            throw new Exception($"Failed to export term import as TBX: {ex.Message}");
-        }
+        return memoryStream;
     }
 }

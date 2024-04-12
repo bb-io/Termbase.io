@@ -1,5 +1,4 @@
 ﻿using Apps.Termbase.io.Constants;
-using Apps.Termbase.io.DataSourceHandlers.StaticDataSourceHandlers;
 using Apps.Termbase.io.Invocables;
 using Apps.Termbase.io.Models.Dto;
 using Apps.Termbase.io.Models.Request;
@@ -7,7 +6,6 @@ using Apps.Termbase.io.Services;
 using Apps.Termbase.io.Utils;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Actions;
-using Blackbird.Applications.Sdk.Common.Dictionaries;
 using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
@@ -48,17 +46,17 @@ public class TermImportActions(InvocationContext invocationContext, IFileManagem
             Creds.ToArray());
     }
     
-    [Action("Export term import", Description = "Download tbx from term import")]
+    [Action("Export termbase from term import", Description = "Download termbase from term import in specified format (by default it will be exported in tbx)")]
     public async Task<FileReference> ExportTermImportAsTbx([ActionParameter] GetTermImportRequest request, 
         [ActionParameter] ExportFileRequest exportFileRequest)
     {
         var format = exportFileRequest.Format ?? "tbx";
+        
         var termImportService = new TermImportService();
-
         var monitoredTermImport = await termImportService.GetTermImport(Creds, request.TermImportUuid);
 
         var termbaseUuid = monitoredTermImport.TermImportTermbase.Uuid;
-        var stream = await termImportService.ExportTermImportAsTbx(termbaseUuid, Creds);
+        var stream = await termImportService.ExportTermImportAsTbx(termbaseUuid, format, Creds);
         
         if(format == "tbx")
         {
