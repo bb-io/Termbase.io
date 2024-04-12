@@ -7,22 +7,13 @@ using Apps.Termbase.io.Api;
 using Blackbird.Applications.Sdk.Common.Actions;
 using Blackbird.Applications.Sdk.Common.Invocation;
 
-namespace Apps.Termbase.io.Actions.LanguageActions;
+namespace Apps.Termbase.io.Actions;
 
 [ActionList]
-public class LanguageActions : AppInvocable
+public class LanguageActions(InvocationContext invocationContext) : AppInvocable(invocationContext)
 {
-    #region Constructors
-
-    public LanguageActions(InvocationContext invocationContext) : base(invocationContext)
-    {
-    }
-
-    #endregion
-
     #region Actions
-
-
+    
     [Action("Get languages", Description = "Get languages")]
     public async Task<GetLanguagesResponse> GetLanguages()
     {
