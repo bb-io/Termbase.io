@@ -2,6 +2,5 @@
 
 public static class CredsNames
 {
-    public const string Authorization = "Authorization";
-
+    public const string ApiKey = "api_key";
 }

@@ -34,7 +34,7 @@ public class ConnectionDefinition : IConnectionDefinition
             // Specifying properties that we will need for authorization of the app
             ConnectionProperties = new List<ConnectionProperty>
             {
-                new(CredsNames.Authorization)
+                new(CredsNames.ApiKey)
                 {
                     // Property user-friendly name that will be displayed on the UI
                     DisplayName = "API token",
@@ -67,7 +67,7 @@ public class ConnectionDefinition : IConnectionDefinition
         // );
         
         // Processing API key credentials
-        var apiKey = values.First(v => v.Key == CredsNames.Authorization);
+        var apiKey = values.First(v => v.Key == CredsNames.ApiKey);
         yield return new AuthenticationCredentialsProvider(
             AuthenticationCredentialsRequestLocation.Header,
             apiKey.Key,

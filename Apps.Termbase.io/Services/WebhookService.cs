@@ -1,5 +1,5 @@
 ﻿using Apps.Termbase.io.Constants;
-using Apps.Termbase.io.RestSharp;
+using Apps.Termbase.io.Api;
 using Apps.Termbase.io.Webhooks.Models.Request;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using RestSharp;
@@ -11,8 +11,8 @@ namespace Apps.Termbase.io.Webhooks.Handlers.Base;
 /// </summary>
 public class WebhookService
 {
-    private AppRestClient Client { get; }
-    
+    private TermbaseClient Client { get; }
+
     public WebhookService()
     {
         Client = new();
@@ -23,11 +23,15 @@ public class WebhookService
     /// </summary>
     public Task SubscribeAsync(
         IEnumerable<AuthenticationCredentialsProvider> creds,
-        Dictionary<string, string> values, 
+        Dictionary<string, string> values,
         string SubscriptionEvent
     )
     {
-        var request = new AppRestRequest(ApiEndpoints.Webhooks, Method.Post, creds);
+        var request = new TermbaseRequest(new TermbaseRequestParameters
+        {
+            Url = Urls.SystemUrl + ApiEndpoints.Webhooks,
+            Method = Method.Post
+        }, creds);
         request.AddJsonBody(new AddWebhookRequest
         {
             // Webhook bird url that will receive webhook data
@@ -47,13 +51,16 @@ public class WebhookService
         string SubscriptionEvent
     )
     {
-
-        var request = new AppRestRequest(ApiEndpoints.Webhooks, Method.Delete, creds);
-        request.AddJsonBody(new AddWebhookRequest
-        {
-            Url = values["payloadUrl"],
-            WebhookAction = GetWebhookActionFromEvent(SubscriptionEvent)
-        });
+        var request = new TermbaseRequest(new TermbaseRequestParameters
+            {
+                Url = Urls.SystemUrl + ApiEndpoints.Webhooks,
+                Method = Method.Delete
+            }, creds)
+            .AddJsonBody(new AddWebhookRequest
+            {
+                Url = values["payloadUrl"],
+                WebhookAction = GetWebhookActionFromEvent(SubscriptionEvent)
+            });
 
         return Client.ExecuteWithHandling(request);
     }

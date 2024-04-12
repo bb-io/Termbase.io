@@ -8,6 +8,5 @@ public class ApiEndpoints
     public const string Languages = "/languages";
     public const string Webhooks = "/webhooks";
     public const string WebhookActions = "/webhook_actions";
-
 }
 
