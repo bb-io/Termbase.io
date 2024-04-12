@@ -10,6 +10,7 @@ public class TermImport
     [Display("Name", Description = "Name of the Termbase")]
     public string Name { get; set; }
 
+    [Display("Term import termbase")]
     public Termbase TermImportTermbase { get; set; }
 
     public Status Status { get; set; }
