@@ -14,7 +14,7 @@ public class LanguageActions(InvocationContext invocationContext) : AppInvocable
 {
     #region Actions
     
-    [Action("Get languages", Description = "Get languages")]
+    [Action("Get languages", Description = "Get all languages")]
     public async Task<GetLanguagesResponse> GetLanguages()
     {
         var request = new TermbaseRequest(new TermbaseRequestParameters

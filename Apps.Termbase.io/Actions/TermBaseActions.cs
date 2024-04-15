@@ -1,4 +1,5 @@
-﻿using Apps.Termbase.io.Api;
+﻿using RestSharp;
+using Apps.Termbase.io.Api;
 using Apps.Termbase.io.Constants;
 using Apps.Termbase.io.Invocables;
 using Apps.Termbase.io.Models.Request;
@@ -10,7 +11,6 @@ using Blackbird.Applications.Sdk.Common.Files;
 using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
-using RestSharp;
 
 namespace Apps.Termbase.io.Actions;
 

@@ -10,11 +10,11 @@ public class WebhookList
 {
     #region Webhooks
 
-    [Webhook("On term changed", typeof(TermChangedHandler), Description = "On term changed")]
+    [Webhook("On term changed", typeof(TermChangedHandler), Description = "Triggered when a term is changed")]
     public Task<WebhookResponse<TermChangedPayload>> OnTermChanged(WebhookRequest webhookRequest)
         => HandlerWebhook<TermChangedPayload>(webhookRequest);
 
-    [Webhook("On term import finished", typeof(TermImportFinishedHandler), Description = "On term import finished")]
+    [Webhook("On term import finished", typeof(TermImportFinishedHandler), Description = "Triggered when a term import is finished")]
     public Task<WebhookResponse<TermImportFinishedPayload>> OnItemCreated(WebhookRequest webhookRequest)
         => HandlerWebhook<TermImportFinishedPayload>(webhookRequest);
 

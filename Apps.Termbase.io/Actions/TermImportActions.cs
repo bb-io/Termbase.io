@@ -19,7 +19,7 @@ public class TermImportActions(InvocationContext invocationContext, IFileManagem
 {
     #region Actions
     
-    [Action("Create term import", Description = "Creates a term import")]
+    [Action("Create term import", Description = "Create a term import and start it")]
     public async Task<TermImport> CreateTermImportAction([ActionParameter] CreateTermImportActionRequest createTermImportRequest)
     {
         var termImportService = new TermImportService();
