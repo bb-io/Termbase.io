@@ -22,7 +22,8 @@ public class WebhookList
 
     #region Utils
 
-    private Task<WebhookResponse<T>> HandlerWebhook<T>(WebhookRequest webhookRequest) where T : class
+    private Task<WebhookResponse<T>> HandlerWebhook<T>(WebhookRequest webhookRequest) 
+        where T : class
     {
         var data = JsonConvert.DeserializeObject<T>(webhookRequest.Body.ToString());
 

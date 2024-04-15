@@ -6,6 +6,4 @@ public class TermbaseTermPayload
 {
     [Display("Term")]
     public string Term { get; set; }
-    
- 
 }

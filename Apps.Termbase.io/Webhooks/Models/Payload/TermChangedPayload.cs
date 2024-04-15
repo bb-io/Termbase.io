@@ -7,9 +7,9 @@ public class TermChangedPayload
     [Display("Termbase")]
     public TermbasePayload Termbase { get; set; }
 
-    [Display("PreUpdatedTermbaseTerm")]
+    [Display("Pre updated termbase term")]
     public TermbaseTermPayload PreUpdatedTermbaseTerm { get; set; }
 
-    [Display("UpdatedTermbaseTerm")]
+    [Display("Updated termbase term")]
     public TermbaseTermPayload UpdatedTermbaseTerm { get; set; }
 }
