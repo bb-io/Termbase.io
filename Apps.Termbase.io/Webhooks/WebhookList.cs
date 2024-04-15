@@ -5,24 +5,15 @@ using Newtonsoft.Json;
 
 namespace Apps.Termbase.io.Webhooks;
 
-/// <summary>
-/// Contains list of webhooks
-/// </summary>
 [WebhookList]
 public class WebhookList
 {
     #region Webhooks
 
-    /// <summary>
-    /// Receives and processes data when item is created
-    /// </summary>
     [Webhook("On term changed", typeof(TermChangedHandler), Description = "On term changed")]
     public Task<WebhookResponse<TermChangedPayload>> OnTermChanged(WebhookRequest webhookRequest)
         => HandlerWebhook<TermChangedPayload>(webhookRequest);
 
-    /// <summary>
-    /// Receives and processes data when termImport is finished
-    /// </summary>
     [Webhook("On termImport finished", typeof(TermImportFinishedHandler), Description = "On termImport finished")]
     public Task<WebhookResponse<TermChangedPayload>> OnItemCreated(WebhookRequest webhookRequest)
         => HandlerWebhook<TermChangedPayload>(webhookRequest);
