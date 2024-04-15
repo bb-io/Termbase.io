@@ -14,9 +14,9 @@ public class WebhookList
     public Task<WebhookResponse<TermChangedPayload>> OnTermChanged(WebhookRequest webhookRequest)
         => HandlerWebhook<TermChangedPayload>(webhookRequest);
 
-    [Webhook("On termImport finished", typeof(TermImportFinishedHandler), Description = "On termImport finished")]
-    public Task<WebhookResponse<TermChangedPayload>> OnItemCreated(WebhookRequest webhookRequest)
-        => HandlerWebhook<TermChangedPayload>(webhookRequest);
+    [Webhook("On term import finished", typeof(TermImportFinishedHandler), Description = "On term import finished")]
+    public Task<WebhookResponse<TermImportFinishedPayload>> OnItemCreated(WebhookRequest webhookRequest)
+        => HandlerWebhook<TermImportFinishedPayload>(webhookRequest);
 
     #endregion
 
