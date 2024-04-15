@@ -20,7 +20,7 @@ public class TermImportService
             Name = request.Name,
             Description = request.Description,
             Uuid = Guid.NewGuid().ToString(),
-            TermImportType = request.TermbaseType ?? "/api/term_import_types/termbase"
+            TermImportType = request.TermbaseType ?? "/api/term_import_types/xliff"
         };
 
         return await Client.ExecuteWithJson<TermImport>(ApiEndpoints.TermImports, Method.Post, createTermImportRequest,

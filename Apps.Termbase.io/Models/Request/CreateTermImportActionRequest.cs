@@ -16,6 +16,6 @@ public class CreateTermImportActionRequest
     [Display("File")]
     public FileReference File { get; set; }
 
-    [Display("Termbase type", Description = "By default, it is set to Termbase."), StaticDataSource(typeof(TermImportTypeStaticDataSourceHandler))]
+    [Display("Termbase type", Description = "By default, it is set to XLIFF"), StaticDataSource(typeof(TermImportTypeStaticDataSourceHandler))]
     public string? TermbaseType { get; set; }
 }

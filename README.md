@@ -38,7 +38,7 @@ Before you can connect you need to make sure that:
 
 ### Term import actions
 
-- **Create term import** - Create a term import and start it
+- **Create term import** - Create a term import and start it, by default it will be imported in xliff format
 - **Get term import** - Get a term import by uuid
 - **Delete term import** - Delete a term import by uuid
 - **Export termbase from term import** - Download termbase from term import in specified format (by default it will be exported in tbx)

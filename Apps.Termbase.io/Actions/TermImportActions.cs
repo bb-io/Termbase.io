@@ -19,7 +19,7 @@ public class TermImportActions(InvocationContext invocationContext, IFileManagem
 {
     #region Actions
     
-    [Action("Create term import", Description = "Create a term import and start it")]
+    [Action("Create term import", Description = "Create a term import and start it, by default it will be imported in xliff format")]
     public async Task<TermImport> CreateTermImportAction([ActionParameter] CreateTermImportActionRequest createTermImportRequest)
     {
         var termImportService = new TermImportService();
