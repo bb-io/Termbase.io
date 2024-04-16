@@ -1,8 +1,9 @@
 ﻿using Blackbird.Applications.Sdk.Common;
+using Blackbird.Applications.Sdk.Common.Metadata;
 
 namespace Apps.Termbase.io;
 
-public class TermbaseIoApplication :  IApplication
+public class TermbaseIoApplication :  IApplication, ICategoryProvider
 {
     public IEnumerable<ApplicationCategory> Categories
     {
