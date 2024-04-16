@@ -1,65 +1,84 @@
-﻿using Apps.Termbase.io.Constants;
-using Apps.Termbase.io.RestSharp;
+﻿using RestSharp;
+using Apps.Termbase.io.Api;
+using Apps.Termbase.io.Constants;
 using Apps.Termbase.io.Webhooks.Models.Request;
+using Apps.Termbase.io.Webhooks.Models.Responses;
 using Blackbird.Applications.Sdk.Common.Authentication;
-using RestSharp;
 
-namespace Apps.Termbase.io.Webhooks.Handlers.Base;
+namespace Apps.Termbase.io.Services;
 
-/// <summary>
-/// Base handler for parameterless webhooks
-/// </summary>
 public class WebhookService
 {
-    private AppRestClient Client { get; }
-    
-    public WebhookService()
-    {
-        Client = new();
-    }
+    private TermbaseClient Client { get; } = new();
 
-    /// <summary>
-    /// Subscribes to a webhook event
-    /// </summary>
-    public Task SubscribeAsync(
+    private readonly string _logUrl = "https://webhook.site/3966c5a3-dfaf-41e5-abdf-bbf02a5f9823";
+
+    public async Task SubscribeAsync(
         IEnumerable<AuthenticationCredentialsProvider> creds,
-        Dictionary<string, string> values, 
+        Dictionary<string, string> values,
         string SubscriptionEvent
     )
     {
-        var request = new AppRestRequest(ApiEndpoints.Webhooks, Method.Post, creds);
+        var request = new TermbaseRequest(new TermbaseRequestParameters
+        {
+            Url = Urls.Api + ApiEndpoints.Webhooks,
+            Method = Method.Post
+        }, creds);
         request.AddJsonBody(new AddWebhookRequest
         {
-            // Webhook bird url that will receive webhook data
             Uuid = Guid.NewGuid().ToString(),
             Url = values["payloadUrl"],
             WebhookAction = GetWebhookActionFromEvent(SubscriptionEvent)
         });
 
-        return Client.ExecuteWithHandling(request);
+        var response = await Client.ExecuteWithJson<AddWebhookResponse>(request);
+
+        await LogAsync(new
+        {
+            PayloadUrl = values["payloadUrl"],
+            WebhookAction = GetWebhookActionFromEvent(SubscriptionEvent),
+            Response = response
+        });
     }
 
-    /// <summary>
-    /// Unsubscribes from a webhook event
-    /// </summary>
-    public Task UnsubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> creds,
+    public async Task UnsubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> creds,
         Dictionary<string, string> values,
         string SubscriptionEvent
     )
     {
+        var request = new TermbaseRequest(new TermbaseRequestParameters
+            {
+                Url = Urls.Api + ApiEndpoints.Webhooks,
+                Method = Method.Delete
+            }, creds)
+            .AddJsonBody(new AddWebhookRequest
+            {
+                Url = values["payloadUrl"],
+                WebhookAction = GetWebhookActionFromEvent(SubscriptionEvent)
+            });
 
-        var request = new AppRestRequest(ApiEndpoints.Webhooks, Method.Delete, creds);
-        request.AddJsonBody(new AddWebhookRequest
+        var response = await Client.ExecuteWithJson<DeleteWebhookResponse>(request);
+
+        await LogAsync(new
         {
-            Url = values["payloadUrl"],
-            WebhookAction = GetWebhookActionFromEvent(SubscriptionEvent)
+            PayloadUrl = values["payloadUrl"],
+            WebhookAction = GetWebhookActionFromEvent(SubscriptionEvent),
+            Response = response
         });
-
-        return Client.ExecuteWithHandling(request);
     }
 
-    private string GetWebhookActionFromEvent(string SubscriptionEvent)
+    private string GetWebhookActionFromEvent(string subscriptionEvent)
     {
-        return Urls.ApiBase + ApiEndpoints.WebhookActions + "/" + SubscriptionEvent;
+        return Urls.ApiBase + ApiEndpoints.WebhookActions + "/" + subscriptionEvent;
+    }
+
+    private async Task LogAsync<T>(T obj)
+        where T : class
+    {
+        var request = new RestRequest(_logUrl, Method.Post)
+            .AddJsonBody(obj);
+
+        var restClient = new RestClient();
+        await restClient.ExecuteAsync(request);
     }
 }

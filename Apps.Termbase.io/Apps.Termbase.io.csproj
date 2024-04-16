@@ -14,7 +14,19 @@
 
     <ItemGroup>
       <PackageReference Include="Blackbird.Applications.Sdk.Common" Version="2.6.0" />
+      <PackageReference Include="Blackbird.Applications.Sdk.Glossaries.Utils" Version="1.0.2-alpha1" />
       <PackageReference Include="Blackbird.Applications.Sdk.Utils" Version="1.0.25" />
+      <PackageReference Include="MimeTypes" Version="2.5.2">
+        <PrivateAssets>all</PrivateAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="image\icon.png" />
+      <EmbeddedResource Include="image\icon.png">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </EmbeddedResource>
     </ItemGroup>
 
 </Project>

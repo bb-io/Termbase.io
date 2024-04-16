@@ -1,4 +1,4 @@
-using Apps.Termbase.io.RestSharp;
+using Apps.Termbase.io.Api;
 using Blackbird.Applications.Sdk.Common;
 using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Common.Invocation;
@@ -13,7 +13,7 @@ public class AppInvocable : BaseInvocable
 {
     #region Properties
 
-    protected AppRestClient Client { get; }
+    protected TermbaseClient Client { get; }
 
     protected IEnumerable<AuthenticationCredentialsProvider> Creds =>
         InvocationContext.AuthenticationCredentialsProviders;

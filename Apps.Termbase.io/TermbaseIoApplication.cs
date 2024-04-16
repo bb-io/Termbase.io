@@ -1,16 +1,9 @@
 ﻿using Blackbird.Applications.Sdk.Common;
-using Blackbird.Applications.Sdk.Common.Metadata;
 
 namespace Apps.Termbase.io;
 
-public class TermbaseIoApplication :  IApplication, ICategoryProvider
+public class TermbaseIoApplication :  IApplication
 {
-    public IEnumerable<ApplicationCategory> Categories
-    {
-        get => new[] { ApplicationCategory.ArtificialIntelligence };
-        set { }
-    }
-    
     public string Name
     {
         get => "termbase.io";
