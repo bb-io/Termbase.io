@@ -17,8 +17,8 @@ Before you can connect you need to make sure that:
 ## Connecting
 
 1. Navigate to apps and search for LanguageWire
-2. Click _Add Connection_.
-3. Name your connection for future reference e.g. 'termbase.io'.
+2. Click _Add Connection_
+3. Name your connection for future reference e.g. 'termbase.io'
 4. Fill 'API token' field with your Auth token
 5. Click _Connect_
 
