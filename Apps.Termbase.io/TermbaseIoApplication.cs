@@ -7,7 +7,7 @@ public class TermbaseIoApplication :  IApplication, ICategoryProvider
 {
     public IEnumerable<ApplicationCategory> Categories
     {
-        get => new[] { ApplicationCategory.ArtificialIntelligence };
+        get => new[] { ApplicationCategory.QualityManagement, ApplicationCategory.CatAndTms };
         set { }
     }
     
