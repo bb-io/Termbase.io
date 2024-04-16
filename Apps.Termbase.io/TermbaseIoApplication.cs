@@ -4,6 +4,12 @@ namespace Apps.Termbase.io;
 
 public class TermbaseIoApplication :  IApplication
 {
+    public IEnumerable<ApplicationCategory> Categories
+    {
+        get => new[] { ApplicationCategory.QualityManagement, ApplicationCategory.CatAndTms };
+        set { }
+    }
+    
     public string Name
     {
         get => "termbase.io";
