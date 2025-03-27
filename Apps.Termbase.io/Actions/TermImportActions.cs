@@ -11,6 +11,7 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 using Blackbird.Applications.SDK.Extensions.FileManagement.Interfaces;
 using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
 using RestSharp;
+using TermImportService = Apps.Termbase.io.Services.TermbaseTermUpdateWebhookTransformerService;
 
 namespace Apps.Termbase.io.Actions;
 
