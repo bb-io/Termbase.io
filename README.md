@@ -45,7 +45,9 @@ Before you can connect you need to make sure that:
 
 ## Webhooks
 
-- **On term changed** - Triggered when a term is changed
+- **On term created** - Triggered when a term is created
+- **On term updated** - Triggered when a term is updated
+- **On term deleted** - Triggered when a term is deleted
 - **On term import finished** - Triggered when a term import is finished
 
 ## Feedback

@@ -10,9 +10,17 @@ public class WebhookList
 {
     #region Webhooks
 
-    [Webhook("On term changed", typeof(TermChangedHandler), Description = "Triggered when a term is changed")]
-    public Task<WebhookResponse<TermChangedPayload>> OnTermChanged(WebhookRequest webhookRequest)
-        => HandlerWebhook<TermChangedPayload>(webhookRequest);
+    [Webhook("On termbase term created", typeof(TermbaseTermCreatedHandler), Description = "Triggered when a termbase term is created")]
+    public Task<WebhookResponse<TermbaseTermCreatedPayload>> OnTermbaseTermCreated(WebhookRequest webhookRequest)
+        => HandlerWebhook<TermbaseTermCreatedPayload>(webhookRequest);
+
+    [Webhook("On termbase term updated", typeof(TermbaseTermUpdatedHandler), Description = "Triggered when a termbase term is updated")]
+    public Task<WebhookResponse<TermbaseTermUpdatedPayload>> OnTermbaseTermUpdated(WebhookRequest webhookRequest)
+    => HandlerWebhook<TermbaseTermUpdatedPayload>(webhookRequest);
+
+    [Webhook("On termbase term deleted", typeof(TermbaseTermDeletedHandler), Description = "Triggered when a termbase term is deleted")]
+    public Task<WebhookResponse<TermbaseTermDeletedPayload>> OnTermbaseTermDeleted(WebhookRequest webhookRequest)
+    => HandlerWebhook<TermbaseTermDeletedPayload>(webhookRequest);
 
     [Webhook("On term import finished", typeof(TermImportFinishedHandler), Description = "Triggered when a term import is finished")]
     public Task<WebhookResponse<TermImportFinishedPayload>> OnItemCreated(WebhookRequest webhookRequest)
@@ -22,7 +30,7 @@ public class WebhookList
 
     #region Utils
 
-    private Task<WebhookResponse<T>> HandlerWebhook<T>(WebhookRequest webhookRequest) 
+    private Task<WebhookResponse<T>> HandlerWebhook<T>(WebhookRequest webhookRequest)
         where T : class
     {
         var data = JsonConvert.DeserializeObject<T>(webhookRequest.Body.ToString());

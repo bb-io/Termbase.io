@@ -9,7 +9,7 @@ using Dto_File = Apps.Termbase.io.Models.Dto.File;
 
 namespace Apps.Termbase.io.Services;
 
-public class TermImportService
+public class TermbaseTermUpdateWebhookTransformerService
 {
     private TermbaseClient Client { get; } = new();
 
@@ -20,7 +20,7 @@ public class TermImportService
             Name = request.Name,
             Description = request.Description,
             Uuid = Guid.NewGuid().ToString(),
-            TermImportType = request.TermbaseType ?? "/api/term_import_types/xliff"
+            TermImportType = request.TermbaseType ?? "/api/term_import_types/termbase"
         };
 
         return await Client.ExecuteWithJson<TermImport>(ApiEndpoints.TermImports, Method.Post, createTermImportRequest,
