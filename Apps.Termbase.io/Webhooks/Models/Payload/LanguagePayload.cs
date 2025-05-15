@@ -2,14 +2,15 @@
 
 namespace Apps.Termbase.io.Webhooks.Models.Payload;
 
-public class TermbaseIndexPayload
+public class LanguagePayload
 {
+
     [Display("Uuid")]
     public string Uuid { get; set; }
-    
+
     [Display("Name")]
     public string Name { get; set; }
 
-    [Display("Language")]
-    public LanguagePayload Language { get; set; }
+    [Display("Code")]
+    public string Code { get; set; }
 }
