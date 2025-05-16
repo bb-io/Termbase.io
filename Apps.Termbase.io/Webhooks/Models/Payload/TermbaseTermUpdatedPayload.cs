@@ -7,13 +7,13 @@ public class TermbaseTermUpdatedPayload
     [Display("Termbase")]
     public TermbasePayload Termbase { get; set; }
 
-    [Display("TermbaseTermEntry")]
+    [Display("Termbase term entry")]
     public TermbaseTermEntryPayload TermbaseTermEntry { get; set; }
 
-    [Display("TermbaseIndex")]
+    [Display("Termbase index")]
     public TermbaseIndexPayload TermbaseIndex { get; set; }
 
-    [Display("Pre updated termbase term")]
+    [Display("Pre-updated termbase term")]
     public TermbaseTermPayload PreUpdatedTermbaseTerm { get; set; }
 
     [Display("Updated termbase term")]

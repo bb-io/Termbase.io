@@ -7,10 +7,10 @@ public class TermbaseTermDeletedPayload
     [Display("Termbase")]
     public TermbasePayload Termbase { get; set; }
 
-    [Display("TermbaseIndex")]
+    [Display("Termbase index")]
     public TermbaseTermEntryPayload TermbaseTermEntry { get; set; }
 
-    [Display("TermbaseTermEntry")]
+    [Display("Termbase term entry")]
     public TermbaseIndexPayload TermbaseIndex { get; set; }
 
     [Display("Deleted termbase term")]
