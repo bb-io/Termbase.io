@@ -29,7 +29,6 @@ public class ConnectionDefinition : IConnectionDefinition
         {
             Name = "Developer API token",
             AuthenticationType = ConnectionAuthenticationType.Undefined,
-            ConnectionUsage = ConnectionUsage.Actions,
             
             // Specifying properties that we will need for authorization of the app
             ConnectionProperties = new List<ConnectionProperty>
@@ -69,7 +68,6 @@ public class ConnectionDefinition : IConnectionDefinition
         // Processing API key credentials
         var apiKey = values.First(v => v.Key == CredsNames.ApiKey);
         yield return new AuthenticationCredentialsProvider(
-            AuthenticationCredentialsRequestLocation.Header,
             apiKey.Key,
             apiKey.Value
         );

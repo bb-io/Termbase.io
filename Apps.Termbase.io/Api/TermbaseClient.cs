@@ -4,6 +4,7 @@ using Blackbird.Applications.Sdk.Common.Authentication;
 using Blackbird.Applications.Sdk.Utils.Extensions.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using Blackbird.Applications.Sdk.Common.Exceptions;
 
 namespace Apps.Termbase.io.Api;
 
@@ -55,7 +56,7 @@ public class TermbaseClient : RestClient
         if (response.IsSuccessStatusCode)
             return response;
         
-        throw new(BuildErrorMessage(response));
+        throw new PluginApplicationException(BuildErrorMessage(response));
     }
     
     private string BuildErrorMessage(RestResponse response)
