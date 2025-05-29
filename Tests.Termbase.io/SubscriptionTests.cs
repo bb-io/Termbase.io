@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Tests.Termbase.io.Base;
 
 namespace Tests.Termbase.io;
+
+[TestClass]
 public class SubscriptionTests : TestBase
 {
     const string SubscriptionUrl = "www.example.com";

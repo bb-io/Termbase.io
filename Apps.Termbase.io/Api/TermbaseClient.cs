@@ -61,6 +61,9 @@ public class TermbaseClient : RestClient
     
     private string BuildErrorMessage(RestResponse response)
     {
+        if (response.Content == null)
+            return response?.ErrorMessage;
+
         return $"Status code: {response.StatusCode}, Content: {response.Content}";
     }
 }
