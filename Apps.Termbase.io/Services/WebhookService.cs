@@ -11,7 +11,7 @@ public class WebhookService
 {   
     private TermbaseClient Client { get; } = new();
 
-    public async Task SubscribeAsync(
+    public async Task<AddWebhookResponse> SubscribeAsync(
         IEnumerable<AuthenticationCredentialsProvider> creds,
         Dictionary<string, string> values,
         string SubscriptionEvent
@@ -30,6 +30,8 @@ public class WebhookService
         });
 
         var response = await Client.ExecuteWithJson<AddWebhookResponse>(request);
+
+        return response;
     }
 
     public async Task UnsubscribeAsync(IEnumerable<AuthenticationCredentialsProvider> creds,

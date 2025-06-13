@@ -6,5 +6,8 @@ public class TermbaseTermEntryPayload
 {
     [Display("Uuid")]
     public string Uuid { get; set; }
-  
+
+    [Display("Fields")]
+    public IEnumerable<TermbaseTermEntryFieldPayload>? Fields { get; set; }
+
 }
