@@ -10,4 +10,8 @@ public class TermbaseTermPayload
 
     [Display("Term")]
     public string Term { get; set; }
+
+    [Display("Fields")]
+    public IEnumerable<TermbaseTermFieldPayload>? Fields { get; set; } // Nullable collection
+
 }
