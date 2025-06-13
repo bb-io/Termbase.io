@@ -11,12 +11,6 @@ public class TermbaseIoApplication :  IApplication, ICategoryProvider
         set { }
     }
     
-    public string Name
-    {
-        get => "termbase.io";
-        set { }
-    }
-    
     public T GetInstance<T>()
     {
         throw new NotImplementedException();
