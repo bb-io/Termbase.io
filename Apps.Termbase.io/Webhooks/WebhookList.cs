@@ -1,4 +1,5 @@
-﻿using Apps.Termbase.io.Webhooks.Handlers;
+﻿using Apps.Termbase.io.Services;
+using Apps.Termbase.io.Webhooks.Handlers;
 using Apps.Termbase.io.Webhooks.Models.Payload;
 using Blackbird.Applications.Sdk.Common.Webhooks;
 using Newtonsoft.Json;
@@ -31,18 +32,26 @@ public class WebhookList
     #region Utils
 
     private Task<WebhookResponse<T>> HandlerWebhook<T>(WebhookRequest webhookRequest)
-        where T : class
+     where T : class
     {
-        var data = JsonConvert.DeserializeObject<T>(webhookRequest.Body.ToString());
+        var bodyJson = webhookRequest.Body.ToString();
 
-        if (data is null)
-            throw new InvalidCastException(nameof(webhookRequest.Body));
+        // Check if T is the payload for TermbaseTermUpdated
+        if (typeof(T) == typeof(TermbaseTermUpdatedPayload))
+        {
+            var termbaseTermEntryFieldService = new TermbaseTermEntryFieldService();
+            bodyJson = termbaseTermEntryFieldService.ModifyTermJson(bodyJson);
+        }
+
+        var data = JsonConvert.DeserializeObject<T>(bodyJson)
+            ?? throw new InvalidCastException(nameof(webhookRequest.Body));
 
         return Task.FromResult(new WebhookResponse<T>
         {
             Result = data
         });
     }
+
 
     #endregion
 }
