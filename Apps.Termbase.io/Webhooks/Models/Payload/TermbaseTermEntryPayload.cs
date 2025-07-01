@@ -10,7 +10,7 @@ public class TermbaseTermEntryPayload
     [Display("Fields")]
     public IEnumerable<TermbaseTermEntryFieldPayload>? Fields { get; set; }
 
-    [Display("Id Field")]
+    [Display("ID Field")]
     public string IdField { get; set; }
 
 }
