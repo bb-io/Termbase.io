@@ -9,7 +9,7 @@ using Blackbird.Applications.Sdk.Common.Invocation;
 
 namespace Apps.Termbase.io.Actions;
 
-[ActionList]
+[ActionList("Languages")]
 public class LanguageActions(InvocationContext invocationContext) : AppInvocable(invocationContext)
 {
     #region Actions

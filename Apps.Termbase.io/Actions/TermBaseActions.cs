@@ -14,7 +14,7 @@ using Blackbird.Applications.Sdk.Glossaries.Utils.Converters;
 
 namespace Apps.Termbase.io.Actions;
 
-[ActionList]
+[ActionList("Termbases")]
 public class TermBaseActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient)
     : AppInvocable(invocationContext)
 {
