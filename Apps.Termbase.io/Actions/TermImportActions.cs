@@ -15,7 +15,7 @@ using TermImportService = Apps.Termbase.io.Services.TermbaseTermUpdateWebhookTra
 
 namespace Apps.Termbase.io.Actions;
 
-[ActionList]
+[ActionList("Term imports")]
 public class TermImportActions(InvocationContext invocationContext, IFileManagementClient fileManagementClient) : AppInvocable(invocationContext)
 {
     #region Actions
