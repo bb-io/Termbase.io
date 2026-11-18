@@ -6,7 +6,7 @@
         <Nullable>enable</Nullable>
         <Product>termbase.io</Product>
         <Description>termbase.io is a fully featured translation solution for enterprises and LSPs, with the focus on leveraging AI and corporate language to produce best quality and human verified results.</Description>
-        <Version>1.0.7</Version>
+        <Version>1.0.8</Version>
         <PackageId>Apps.Termbase.io</PackageId>
         <AssemblyName>Apps.Termbase.io</AssemblyName>
         <RootNamespace>Apps.Termbase.io</RootNamespace>
@@ -29,4 +29,7 @@
       </EmbeddedResource>
     </ItemGroup>
 
+    <ItemGroup>
+        <EmbeddedResource Include="..\README.md" Link="README.md" CopyToOutputDirectory="Always" />
+    </ItemGroup>
 </Project>
